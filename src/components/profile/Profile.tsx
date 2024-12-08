@@ -91,6 +91,7 @@ const Profile: React.FC = () => {
                     setError('No token found. Please log in.');
                     return;
                 }
+                console.log('Auth Token:', token);
 
                 // Decode token and set user info
                 const decodedToken = jwtDecode<{ id: string; email: string; role: string }>(token);
@@ -102,12 +103,15 @@ const Profile: React.FC = () => {
                     role: decodedToken.role
                 });
 
+                axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
                 // Fetch additional profile info if needed
                 const response = await axiosConfig.get(`/user/${decodedToken.id}`);
                 setUserInfo((prevUserInfo) => ({
                     ...prevUserInfo,
                     ...response.data.data, // Merge data from API
                 }));
+
             } catch (err) {
                 console.error('Error fetching user profile:', err);
                 setError('Failed to fetch user profile.');
@@ -131,21 +135,24 @@ const Profile: React.FC = () => {
                             <div className="profile__part1-profileCard-cardInfo">
                                 <div className="profile__part1-profileCard-cardInfo-info">
                                     <div className="profile__part1-profileCard-cardInfo-infoText">
-                                        {/*<h1>{userInfo.lastName} {userInfo.username}</h1>*/}
-                                        {/*<h3>{userInfo.username}</h3>*/}
                                         <div>
-                                            <h1>John Tailer</h1>
-                                            <h3>JohnFish</h3>
+                                            <h1>{userInfo.lastName} {userInfo.username}</h1>
+                                            <h3>{userInfo.username}</h3>
                                         </div>
                                         <div className="profile__part1-profileCard-cardInfo-changePasswordButton">
                                             {isModalOpen && (
-                                                <div className="modal">
-                                                    <div className="modal__content">
-                                                        <span className="modal__content-close"
-                                                              onClick={closeModal}>&times;</span>
-                                                        <form onSubmit={handleSubmit}>
-                                                            <h3>Change Password</h3>
-                                                            <div className="modal__content-inputbtn">
+                                                <>
+                                                    {/* Overlay для затемнения фона */}
+                                                    <div className="modal__overlay" onClick={closeModal}></div>
+
+                                                    {/* Модальное окно */}
+                                                    <div className="modal">
+                                                        <div className="modal__content">
+                                                            <button className="modal__close" onClick={closeModal}>
+                                                                &times;
+                                                            </button>
+                                                            <form onSubmit={handleSubmit}>
+                                                                <h3>Change Password</h3>
                                                                 <div>
                                                                     <input
                                                                         type="password"
@@ -154,7 +161,7 @@ const Profile: React.FC = () => {
                                                                         onChange={(e) =>
                                                                             setChangePassword({
                                                                                 ...changePassword,
-                                                                                oldPassword: e.target.value
+                                                                                oldPassword: e.target.value,
                                                                             })
                                                                         }
                                                                     />
@@ -165,7 +172,7 @@ const Profile: React.FC = () => {
                                                                         onChange={(e) =>
                                                                             setChangePassword({
                                                                                 ...changePassword,
-                                                                                newPassword: e.target.value
+                                                                                newPassword: e.target.value,
                                                                             })
                                                                         }
                                                                     />
@@ -176,19 +183,18 @@ const Profile: React.FC = () => {
                                                                         onChange={(e) =>
                                                                             setChangePassword({
                                                                                 ...changePassword,
-                                                                                confirmPassword: e.target.value
+                                                                                confirmPassword: e.target.value,
                                                                             })
                                                                         }
                                                                     />
                                                                 </div>
                                                                 <button type="submit">Submit</button>
-                                                            </div>
-                                                            {message && <p>{message}</p>}
-                                                            {error && <p style={{color: 'red'}}>{error}</p>}
-                                                        </form>
+                                                                {message && <p>{message}</p>}
+                                                                {error && <p style={{ color: "red" }}>{error}</p>}
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                    <div className="modal__content-overlay" onClick={closeModal}></div>
-                                                </div>
+                                                </>
                                             )}
                                         </div>
                                     </div>

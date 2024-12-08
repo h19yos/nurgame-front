@@ -25,7 +25,6 @@ button {
 }
 
 .dashboardHome {
-  background-color: #1C3554;
   display: grid;
   grid-template-columns: 15% 85%;
   height: 100%;
@@ -52,7 +51,7 @@ button {
     }
 
     &-img {
-
+      width: 9rem;
     }
   }
 
@@ -68,12 +67,12 @@ button {
       font-size: 20px;
       line-height: 24px;
       font-weight: 600;
-      color: white;
+      color: black;
       margin-bottom: 0.938rem;
     }
 
     &-link {
-      color: white;
+      color: black;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -85,7 +84,12 @@ button {
     }
 
     &-img {
-      padding-right: 1.563rem;
+      margin-right: 1.563rem;
+      width: 2rem;
+      padding: 0.2rem;
+      border-radius: 0.5rem;
+      border: 0;
+      background-color: black;
     }
 
     &-text {
@@ -101,7 +105,7 @@ button {
 
     &-link {
       text-decoration: none;
-      color: white;
+      color: black;
     }
 
     &-item {
@@ -134,13 +138,11 @@ button {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     justify-items: center;
-    background-color: #2980b9;
 
     &-test {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background-color: #ffb400;
       width: 100%;
       padding: 2rem 0;
 
@@ -229,7 +231,6 @@ button {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: #2ecc71;
       width: 100%;
       padding: 2rem 0;
 
@@ -264,6 +265,8 @@ button {
             align-items: center;
             gap: 15px;
             margin-top: 0.7rem;
+            margin-bottom: 1rem;
+
 
             img {
               width: 50px;
@@ -1054,8 +1057,39 @@ button {
   align-items: center;
   justify-content: center;
 
+  &__auth {
+
+
+    &-buttons {
+      display: flex;
+      gap: 0.8rem;
+
+      button {
+        width: 6rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+        border: none;
+        color: #fff;
+        background-color: #0B00AE;
+        font-weight: bold;
+      }
+    }
+  }
+
   &__dropdown {
     display: none;
+    position: absolute;
+    top: 6rem;
+    right: 2rem;
+
+    button {
+      width: 6rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      border: none;
+      color: #fff;
+      background-color: #0B00AE;
+    }
   }
 
   &__dropdown.show {
@@ -1174,7 +1208,7 @@ button {
       border-radius: 0.5rem;
       display: grid;
       gap: 0.65rem;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
       background-color: rgba(230, 230, 230, 0.15);
     }
   }
@@ -1261,7 +1295,7 @@ button {
 }
 
 .pcourse-card {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   padding: 1rem;
   background-color: rgba(230, 230, 230, 0.15);
@@ -1315,7 +1349,7 @@ button {
   padding: 1rem;
   border-radius: 8px;
   background-color: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 
   &__context {
     display: flex;
@@ -1855,7 +1889,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   background-color: rgba(230, 230, 230, 0.15);
   padding: 0.5rem;
@@ -2126,5 +2160,90 @@ button {
         }
       }
     }
+  }
+}
+
+
+
+
+.profile {
+  button {
+    cursor: pointer;
+  }
+}
+
+/* Overlay для затемнения фона */
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Прозрачный черный цвет */
+  z-index: 1000;
+}
+
+/* Контейнер модального окна */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1100; /* Поверх overlay */
+}
+
+/* Контент модального окна */
+.modal__content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+
+  input {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0.2rem 0;
+  }
+
+  button {
+    padding: 10px 15px;
+    background-color: #0B00AE;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #102844;
+    }
+  }
+
+  .modal__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
   }
 }

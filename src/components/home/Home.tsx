@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import SignOut from "../signmethods/SignOut.tsx";
+import {useNavigate} from "react-router-dom";
 
 // Interfaces for Data Types
 interface UserData {
@@ -136,10 +137,8 @@ const Home: React.FC = () => {
     const [communityGroups, setCommunityGroups] = useState<CommunityGroup[]>([]);
     const [activities, setActivities] = useState<Activity[]>([]);
     const [showDropdown, setShowDropdown] = useState(false);
-
-    const toggleDropdown = () => {
-        setShowDropdown((prev) => !prev);
-    };
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setUserData(mockUserData);
@@ -163,9 +162,25 @@ const Home: React.FC = () => {
             setPopularCourses(await popularResponse.json());
             setCommunityGroups(await communityResponse.json());
             setActivities(await activityResponse.json());
+
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                // Восстановление данных пользователя (если есть)
+                // Пример: вы можете использовать `jwt-decode` для декодирования токена
+                const user = JSON.parse(localStorage.getItem('userData') || '{}'); // Или замените на API-запрос
+                setUserData(user);
+                setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
+            }
         };
         fetchData();
     }, []);
+
+    const toggleDropdown = () => setShowDropdown((prev) => !prev);
+
+    const handleLoginRedirect = () => navigate('/login');
+    const handleRegisterRedirect = () => navigate('/register');
 
     return (
         <div className="dashboard">
@@ -173,26 +188,43 @@ const Home: React.FC = () => {
                 <div className="dashboard__part1">
                     <div className="dashboard__part1-header">
                         <div className="dashboard__part1-welcome">
-                            <p>Hello {userData?.name}, Welcome back.</p>
-                            <h1>Your Dashboard today</h1>
+                            {isLoggedIn && userData ? (
+                                <>
+                                    <p>Hello {userData.name}, Welcome back.</p>
+                                    <h1>Your Dashboard today</h1>
+                                </>
+                            ) : (
+                                <>
+                                    <p>Hello, Welcome to our platform.</p>
+                                    <h1>Please Login or Register</h1>
+                                </>
+                            )}
                         </div>
-                        <div className="dashboard__part1-profile" onClick={toggleDropdown}>
-                            <img src="src/assets/images/ava.svg" alt="Profile"/>
-                            <span>{userData?.level}</span>
-                            <button onClick={toggleDropdown}>Toggle Dropdown</button>
-                            {showDropdown && (
-                                <div className={`dashboard__dropdown ${showDropdown ? "show" : ""}`}>
-                                    <a href="/profile">
-                                        <button>Profile</button>
-                                    </a>
-                                    <SignOut/>
+                        <div className="dashboard__part1-profile">
+                            {isLoggedIn && userData ? (
+                                <div onClick={toggleDropdown}>
+                                    <img src="src/assets/images/ava.svg" alt="Profile"/>
+                                    <span>{userData.level}</span>
+                                    {showDropdown && (
+                                        <div className={`dashboard__dropdown ${showDropdown ? 'show' : ''}`}>
+                                            <a href="/profile">
+                                                <button>Profile</button>
+                                            </a>
+                                            <SignOut/>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="dashboard__auth-buttons">
+                                    <button onClick={handleLoginRedirect}>Login</button>
+                                    <button onClick={handleRegisterRedirect}>Register</button>
                                 </div>
                             )}
                         </div>
                     </div>
 
                     <div className="dashboard__part1-stats">
-                    {coursesData && (
+                        {coursesData && (
                             <>
                                 <StatCard title="Courses Completed" count={coursesData.completed} progress={50}
                                           icon={mockCoursesDataIcon.icon1}/>

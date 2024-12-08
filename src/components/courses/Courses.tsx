@@ -1,4 +1,5 @@
 import {useState} from "react";
+import Graph from "./Graph.tsx";
 
 const Courses = () => {
     // State to track which step is unlocked for each unit
@@ -141,6 +142,7 @@ const Courses = () => {
                                     </div>
                                 </div>
                             </div>
+                            <Graph />
                         </div>
                     </div>
                 </div>

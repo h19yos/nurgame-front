@@ -15,6 +15,7 @@ export const Links = {
     profile: "/profile",
     forgotPassword: "/forgot-password",
     home: "/",
+    courses: "/courses",
 
     test: "/testerArea",
     testLogin: "/testLogin",

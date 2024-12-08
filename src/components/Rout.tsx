@@ -7,6 +7,7 @@ import ForgotPassword from './login/ForgotPassword.tsx'
 import Dashboard from "./home/Dashboard.tsx";
 import TestField from "./testfield/TestField.tsx";
 import SignIn from "./signmethods/SignIn.tsx";
+import CoursesContainer from "./courses/CoursesContainer.tsx";
 
 const Rout = () => {
     return (
@@ -19,6 +20,7 @@ const Rout = () => {
                 <Route path={Links.home} element={<Dashboard/>}/>
                 <Route path={Links.test} element={<TestField/>}/>
                 <Route path={Links.testLogin} element={<SignIn/>}/>
+                <Route path={Links.courses} element={<CoursesContainer/>}/>
             </Routes>
         </div>
     );

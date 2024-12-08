@@ -21,7 +21,7 @@ const ForgotPassword = () => {
         }
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         const { oldPassword, newPassword, confirmPassword } = changePassword;
@@ -35,7 +35,7 @@ const ForgotPassword = () => {
             const token = localStorage.getItem('authToken');
             console.log('Token', token);
 
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 
             const response = await axiosConfig.post('/auth/change-password/', {

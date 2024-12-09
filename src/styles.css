@@ -1755,17 +1755,24 @@
 }
 
 .lesson {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  padding: 2rem;
+  gap: 1rem;
+}
+.lesson__left {
+  width: 100%;
+}
+.lesson-right {
+  width: 100%;
 }
 .lesson__video-section {
-  width: 70%;
+  width: 80%;
 }
 .lesson__video-section .lesson__video {
   width: 100%;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 .lesson__video-section .lesson__details h2 {
   font-size: 1.5rem;
@@ -1823,6 +1830,7 @@
 .lesson__reviews .lesson__form {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 .lesson__reviews .lesson__form .lesson__textarea {
   width: 100%;

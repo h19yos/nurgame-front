@@ -1754,6 +1754,97 @@
   transition: 0.2s ease;
 }
 
+.lesson {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.lesson__video-section {
+  width: 70%;
+}
+.lesson__video-section .lesson__video {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.lesson__video-section .lesson__details h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+.lesson__video-section .lesson__details p {
+  font-size: 1rem;
+  color: #666;
+}
+.lesson__sidebar {
+  width: 25%;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+}
+.lesson__sidebar h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.lesson__sidebar .lesson__list {
+  list-style: none;
+  padding: 0;
+}
+.lesson__sidebar .lesson__list .lesson__list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.lesson__sidebar .lesson__list .lesson__list-item span {
+  font-size: 1rem;
+}
+.lesson__sidebar .lesson__list .lesson__list-item .lesson__checkbox {
+  width: 20px;
+  height: 20px;
+}
+.lesson__reviews {
+  margin-top: 20px;
+}
+.lesson__reviews h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.lesson__reviews .lesson__review {
+  margin-bottom: 15px;
+}
+.lesson__reviews .lesson__review strong {
+  font-size: 1rem;
+  color: #333;
+}
+.lesson__reviews .lesson__review p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.lesson__reviews .lesson__form {
+  display: flex;
+  flex-direction: column;
+}
+.lesson__reviews .lesson__form .lesson__textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.lesson__reviews .lesson__form .lesson__submit-button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.lesson__reviews .lesson__form .lesson__submit-button:hover {
+  background-color: #e65c00;
+}
+
 .profile button {
   cursor: pointer;
 }
@@ -1795,10 +1886,27 @@
   flex-direction: column;
   gap: 1rem;
 }
+.modal__content h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+.modal__content p {
+  font-size: 14px;
+  font-weight: 400;
+}
 .modal__content h3 {
   text-align: center;
   font-weight: bold;
   font-size: 1.6rem;
+}
+.modal__content-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 0.5rem;
+}
+.modal__content-buttons button {
+  width: 6rem;
 }
 .modal__content input {
   width: 95%;

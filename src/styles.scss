@@ -2164,6 +2164,117 @@ button {
 }
 
 
+.lesson {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+
+  &__video-section {
+    width: 70%;
+    .lesson__video {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .lesson__details {
+      h2 {
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #666;
+      }
+    }
+  }
+
+  &__sidebar {
+    width: 25%;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .lesson__list {
+      list-style: none;
+      padding: 0;
+
+      .lesson__list-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        span {
+          font-size: 1rem;
+        }
+
+        .lesson__checkbox {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+
+  &__reviews {
+    margin-top: 20px;
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .lesson__review {
+      margin-bottom: 15px;
+
+      strong {
+        font-size: 1rem;
+        color: #333;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: #555;
+      }
+    }
+
+    .lesson__form {
+      display: flex;
+      flex-direction: column;
+
+      .lesson__textarea {
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .lesson__submit-button {
+        align-self: flex-end;
+        padding: 10px 20px;
+        background-color: #ff6600;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e65c00;
+        }
+      }
+    }
+  }
+}
+
 
 
 .profile {
@@ -2210,10 +2321,31 @@ button {
     gap: 1rem;
   }
 
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
   h3 {
     text-align: center;
     font-weight: bold;
     font-size: 1.6rem;
+  }
+
+  &-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 0.5rem;
+
+    button {
+      width: 6rem;
+    }
   }
 
   input {

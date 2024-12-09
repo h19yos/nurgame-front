@@ -1,13 +1,10 @@
 import {useEffect, useState} from 'react';
 import SignOut from "../signmethods/SignOut.tsx";
 import {useNavigate} from "react-router-dom";
+import axiosConfig from "../../api/axiosConfig.ts";
+import {jwtDecode} from 'jwt-decode';
+import {IUser} from "../../models/Models.tsx";
 
-// Interfaces for Data Types
-interface UserData {
-    name: string;
-    level: string;
-    profilePicture: string;
-}
 
 interface CoursesData {
     completed: number;
@@ -68,11 +65,6 @@ interface ActivityCardProps {
 }
 
 // Dummy Data for Demonstration Purposes
-const mockUserData: UserData = {
-    name: "John",
-    level: "Level 3",
-    profilePicture: "path/to/profile/pic", // Replace with actual image path
-};
 
 const mockCoursesData: CoursesData = {
     completed: 3,
@@ -130,18 +122,18 @@ const mockActivity: Activity[] = [
 
 // Main Dashboard Component
 const Home: React.FC = () => {
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState<IUser | null>(null);
     const [coursesData, setCoursesData] = useState<CoursesData | null>(null);
     const [unfinishedCourses, setUnfinishedCourses] = useState<UnfinishedCourse[]>([]);
     const [popularCourses, setPopularCourses] = useState<PopularCourse[]>([]);
     const [communityGroups, setCommunityGroups] = useState<CommunityGroup[]>([]);
     const [activities, setActivities] = useState<Activity[]>([]);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showSignOutModal, setShowSignOutModal] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        setUserData(mockUserData);
         setCoursesData(mockCoursesData);
         setUnfinishedCourses(mockUnfinishedCourses);
         setPopularCourses(mockPopularCourses);
@@ -149,29 +141,40 @@ const Home: React.FC = () => {
         setActivities(mockActivity);
 
         const fetchData = async () => {
-            const userResponse = await fetch('/user');
-            const coursesResponse = await fetch('/courses');
-            const unfinishedResponse = await fetch('/unfinishedCourses');
-            const popularResponse = await fetch('/popularCourses');
-            const communityResponse = await fetch('/communityGroups');
-            const activityResponse = await fetch('/activities');
+            try {
+                const token = localStorage.getItem("authToken");
+                if (token) {
+                    // Decode the token to get user ID or relevant data
+                    const decodedToken: any = jwtDecode(token);
 
-            setUserData(await userResponse.json());
-            setCoursesData(await coursesResponse.json());
-            setUnfinishedCourses(await unfinishedResponse.json());
-            setPopularCourses(await popularResponse.json());
-            setCommunityGroups(await communityResponse.json());
-            setActivities(await activityResponse.json());
+                    axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            const token = localStorage.getItem('authToken');
-            if (token) {
-                // Восстановление данных пользователя (если есть)
-                // Пример: вы можете использовать `jwt-decode` для декодирования токена
-                const user = JSON.parse(localStorage.getItem('userData') || '{}'); // Или замените на API-запрос
-                setUserData(user);
-                setIsLoggedIn(true);
-            } else {
-                setIsLoggedIn(false);
+                    // Fetch user data from your API using axiosConfig
+                    const userResponse = await axiosConfig.get(`/user/${decodedToken.id}`);
+                    setUserData(userResponse.data.data);
+                    console.log(userResponse.data.data);
+                    // Fetch other necessary data
+                    // const coursesResponse = await axiosConfig.get("/courses");
+                    // const unfinishedResponse = await axiosConfig.get("/unfinishedCourses");
+                    // const popularResponse = await axiosConfig.get("/popularCourses");
+                    // const communityResponse = await axiosConfig.get("/communityGroups");
+                    // const activityResponse = await axiosConfig.get("/activities");
+
+                    // setCoursesData(coursesResponse.data);
+                    // setUnfinishedCourses(unfinishedResponse.data);
+                    // setPopularCourses(popularResponse.data);
+                    // setCommunityGroups(communityResponse.data);
+                    // setActivities(activityResponse.data);
+
+                    setIsLoggedIn(true);
+                } else {
+                    // Token not found, user is not logged in
+                    setIsLoggedIn(false);
+                    console.error('Token not found, user is not logged in.');
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setIsLoggedIn(false); // Ensure UI reflects the lack of authentication
             }
         };
         fetchData();
@@ -190,7 +193,7 @@ const Home: React.FC = () => {
                         <div className="dashboard__part1-welcome">
                             {isLoggedIn && userData ? (
                                 <>
-                                    <p>Hello {userData.name}, Welcome back.</p>
+                                    <p>Hello {userData.firstName} {userData.lastName}, Welcome back.</p>
                                     <h1>Your Dashboard today</h1>
                                 </>
                             ) : (
@@ -203,14 +206,14 @@ const Home: React.FC = () => {
                         <div className="dashboard__part1-profile">
                             {isLoggedIn && userData ? (
                                 <div onClick={toggleDropdown}>
-                                    <img src="src/assets/images/ava.svg" alt="Profile"/>
-                                    <span>{userData.level}</span>
+                                    <img src={userData.avatarUrl} alt="Profile"/>
+                                    <span>{userData.username}</span>
                                     {showDropdown && (
                                         <div className={`dashboard__dropdown ${showDropdown ? 'show' : ''}`}>
                                             <a href="/profile">
                                                 <button>Profile</button>
                                             </a>
-                                            <SignOut/>
+                                            <button onClick={() => setShowSignOutModal(true)}>Sign Out</button>
                                         </div>
                                     )}
                                 </div>
@@ -220,6 +223,8 @@ const Home: React.FC = () => {
                                     <button onClick={handleRegisterRedirect}>Register</button>
                                 </div>
                             )}
+                            {/* Pass the modal control state */}
+                            <SignOut showModal={showSignOutModal} setShowModal={setShowSignOutModal} />
                         </div>
                     </div>
 

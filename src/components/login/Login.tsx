@@ -1,8 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
-import axios from "axios";
 import { Links } from '../../models/Models';
 import { jwtDecode } from 'jwt-decode';
+import axiosConfig from "../../api/axiosConfig.ts";
 
 interface LoginCredentials {
     email: string;
@@ -27,57 +27,29 @@ const Login = () => {
         setCredentials((prev) => ({ ...prev, [name]: value }));
     };
 
-    const addTokenToHeaders = (token: string) => {
-        console.log('Token:', token); // Debug the token here
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        } else {
-            delete axios.defaults.headers.common['Authorization'];
-        }
-    };
-
-    const handleLogin = async (credentials: LoginCredentials) => {
+    const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:4001/api/auth/login', credentials);
-            const accessToken = response.data;
-            console.log(accessToken);
-            if (accessToken) {
-                addTokenToHeaders(accessToken);
-                return { token: accessToken };
+            const response = await axiosConfig.post("/auth/login", credentials);
+            const token = response.data?.accessToken;
+
+            if (token) {
+                axiosConfig.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+                localStorage.setItem("authToken", token);
+
+                const decoded: DecodedToken = jwtDecode<DecodedToken>(token);
+                navigate(decoded.role === "Tester" ? "/profile" : "/profile", { replace: true });
             } else {
-                throw new Error('Token not received');
+                throw new Error("Invalid credentials");
             }
-        } catch (error) {
-            console.error('Login error', error);
-            throw error;
+        } catch (err) {
+            setError("Login failed. Please check your credentials.");
+            console.error(err);
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const { token } = await handleLogin(credentials);
-            console.log('Login successful', token.accessToken);
-
-            // Decode the token to get the user role
-            const decodedToken: DecodedToken = jwtDecode<DecodedToken>(token.accessToken);
-            console.log('Decoded token', decodedToken.id);
-            console.log('Token', token.accessToken);
-            const role = decodedToken.role;
-
-            // Store the token in local storage
-            localStorage.setItem('authToken', token.accessToken);
-
-            // Redirect to RoleChoice page if the role is 'admin'
-            if (role === 'Tester') {
-                navigate('/profile', { replace: true });
-            } else {
-                navigate('/profile', { replace: true });
-            }
-        } catch (error) {
-            setError('Login failed. Please check your credentials.');
-            console.error('Login error', error);
-        }
+        handleLogin();
     };
 
     const handleForgotPassword = () => {

@@ -16,6 +16,7 @@ export const Links = {
     forgotPassword: "/forgot-password",
     home: "/",
     courses: "/courses",
+    lesson: "/lesson",
 
     test: "/testerArea",
     testLogin: "/testLogin",
@@ -29,6 +30,7 @@ export interface IUser {
     password: string,
     confirmPassword: string,
     roleName: string,
+    avatarUrl: string,
 }
 
 export interface IChangePassword {

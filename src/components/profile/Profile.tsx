@@ -1,8 +1,7 @@
 import {useState, useEffect, FormEvent} from 'react';
-import axios from 'axios';
 import {FaEllipsisV, FaCheck} from 'react-icons/fa';
 import {jwtDecode} from 'jwt-decode';
-import {IChangePassword} from "../../models/Models.tsx";
+import {IChangePassword, IUser} from "../../models/Models.tsx";
 import axiosConfig from "../../api/axiosConfig.ts";
 
 interface Course {
@@ -18,16 +17,8 @@ interface Message {
     unreadCount?: number;
 }
 
-interface UserInfo {
-    id: string;
-    firstName: string;
-    lastName: string;
-    username: string;
-    email: string;
-}
-
 const Profile: React.FC = () => {
-    const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+    const [userInfo, setUserInfo] = useState<IUser | null>(null);
     const [changePassword, setChangePassword] = useState<IChangePassword>({} as IChangePassword);
     const [error, setError] = useState<string>('');
     const [message, setMessage] = useState<string>('');
@@ -60,9 +51,9 @@ const Profile: React.FC = () => {
             const token = localStorage.getItem('authToken');
             if (!token) throw new Error('No authentication token found');
 
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            const response = await axios.post('http://localhost:4001/api/auth/change-password/', {
+            const response = await axiosConfig.post('http://localhost:4001/api/auth/change-password/', {
                 oldPassword,
                 newPassword,
             });
@@ -81,6 +72,33 @@ const Profile: React.FC = () => {
         setChangePassword({oldPassword: '', newPassword: '', confirmPassword: ''});
         setMessage('');
         setError('');
+    };
+
+    const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('image', file);
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                axiosConfig.post('/user/upload', formData)
+                    .then(response => {
+                        console.log('res', response.data.data.secure_url)
+                        setUserInfo(response.data.data.secure_url);
+                    })
+                    .catch(error => {
+                        console.error('Error uploading avatar:', error);
+                    });
+            }
+        }
+    };
+
+    const handleAvatarClick = () => {
+        const fileInput = document.getElementById("avatar-upload");
+        if (fileInput) {
+            fileInput.click(); // Триггерим клик
+        }
     };
 
     useEffect(() => {
@@ -129,8 +147,31 @@ const Profile: React.FC = () => {
                     {userInfo && (
                         <div className="profile__part1-profileCard">
                             <div className="profile__part1-profileCard-ava">
-                                <img className="profile__part1-ava-img" src={'https://via.placeholder.com/220'}
-                                     alt="Profile"/>
+                                {/* Кликабельное изображение */}
+                                <img
+                                    className="profile__part1-ava-img"
+                                    src={userInfo.avatarUrl || "https://via.placeholder.com/220"}
+                                    alt="Profile"
+                                    onClick={handleAvatarClick} // Привязываем событие клика
+                                    style={{
+                                        width: "150px",
+                                        height: "150px",
+                                        borderRadius: "50%",
+                                        objectFit: "cover",
+                                        display: "block",
+                                        margin: "0 auto",
+                                        cursor: "pointer",
+                                    }}
+                                />
+
+                                {/* Скрытое поле для загрузки файла */}
+                                <input
+                                    type="file"
+                                    id="avatar-upload"
+                                    style={{ display: "none" }}
+                                    onChange={handleAvatarChange} // Обработчик изменения файла
+                                    accept="image/*" // Только изображения
+                                />
                             </div>
                             <div className="profile__part1-profileCard-cardInfo">
                                 <div className="profile__part1-profileCard-cardInfo-info">
@@ -190,7 +231,7 @@ const Profile: React.FC = () => {
                                                                 </div>
                                                                 <button type="submit">Submit</button>
                                                                 {message && <p>{message}</p>}
-                                                                {error && <p style={{ color: "red" }}>{error}</p>}
+                                                                {error && <p style={{color: "red"}}>{error}</p>}
                                                             </form>
                                                         </div>
                                                     </div>

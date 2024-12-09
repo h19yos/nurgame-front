@@ -1,7 +1,7 @@
 import {useState, ChangeEvent, FormEvent} from 'react';
 import {useNavigate, NavLink} from 'react-router-dom';
 import {IUser, Links} from '../../models/Models.tsx';
-import axios from 'axios';
+import axiosConfig from "../../api/axiosConfig.ts";
 
 function Register() {
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ function Register() {
         e.preventDefault();
         console.log('Submitting user data:', user);
         try {
-            const response = await axios.post('http://localhost:4001/api/auth/signup', user);
+            const response = await axiosConfig.post('/auth/signup', user);
             alert(response.data.message);
             navigate('/login', { replace: true });
         } catch (error) {

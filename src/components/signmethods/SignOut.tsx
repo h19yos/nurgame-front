@@ -17,8 +17,8 @@ const SignOut: React.FC<SignOutProps> = ({showModal, setShowModal}) => {
             const response = await axiosConfig.post(Http.logout);
             console.log("Sign-out response:", response);
             if (response.status === 200) {
-                // Clear any stored user data (e.g., tokens)
-                localStorage.removeItem("userToken");
+                localStorage.removeItem("refreshToken");
+                console.log("Helllo suka: ", response);
                 setShowModal(false);
                 navigate("/login");
             } else {

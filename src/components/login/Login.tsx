@@ -31,10 +31,14 @@ const Login = () => {
         try {
             const response = await axiosConfig.post("/auth/login", credentials);
             const token = response.data?.accessToken;
+            const refreshToken = response.data?.refreshToken;
+            console.log("Hello",response);
+            console.log("POKA",token);
 
             if (token) {
                 axiosConfig.defaults.headers.common["Authorization"] = `Bearer ${token}`;
                 localStorage.setItem("authToken", token);
+                localStorage.setItem("refreshToken", refreshToken);
 
                 const decoded: DecodedToken = jwtDecode<DecodedToken>(token);
                 navigate(decoded.role === "Tester" ? "/profile" : "/profile", { replace: true });

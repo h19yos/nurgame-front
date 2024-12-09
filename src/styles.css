@@ -1936,4 +1936,45 @@
   cursor: pointer;
 }
 
+/* Затемнение фона */
+.achievement-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный чёрный фон */
+  z-index: 1000;
+}
+
+/* Контейнер достижения */
+.achievement-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff; /* Белый фон */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1100; /* Поверх overlay */
+  text-align: center;
+  width: 80%; /* Для адаптивности */
+  max-width: 400px; /* Максимальная ширина */
+}
+
+/* Иконка достижения */
+.achievement-icon {
+  font-size: 2rem;
+  color: green;
+  margin-bottom: 10px;
+}
+
+/* Изображение достижения */
+.achievement-image {
+  max-width: 100px;
+  margin-top: 10px;
+  border-radius: 50%;
+}
+
 /*# sourceMappingURL=styles.css.map */

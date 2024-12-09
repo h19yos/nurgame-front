@@ -3,6 +3,7 @@ import {FaEllipsisV, FaCheck} from 'react-icons/fa';
 import {jwtDecode} from 'jwt-decode';
 import {IChangePassword, IUser} from "../../models/Models.tsx";
 import axiosConfig from "../../api/axiosConfig.ts";
+import {io} from 'socket.io-client';
 
 interface Course {
     title: string;
@@ -17,12 +18,22 @@ interface Message {
     unreadCount?: number;
 }
 
+interface Achievement {
+    name: string;
+    description: string;
+    reward: string;
+    icon: string;
+}
+
+const socket = io('http://192.168.0.103:4001');
+
 const Profile: React.FC = () => {
     const [userInfo, setUserInfo] = useState<IUser | null>(null);
     const [changePassword, setChangePassword] = useState<IChangePassword>({} as IChangePassword);
     const [error, setError] = useState<string>('');
     const [message, setMessage] = useState<string>('');
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [achievement, setAchievement] = useState<Achievement>({} as Achievement);
 
     const courses: Course[] = [
         {title: 'E-commerce Excellence: Selling Smarter Online', instructor: 'Andy Stevanus'},
@@ -137,6 +148,24 @@ const Profile: React.FC = () => {
         };
 
         fetchUserProfile();
+
+        socket.on('connect', () => {
+            console.log('Socket connected:', socket.id);
+        });
+
+        socket.on('achievementUnlocked', (data) => {
+            console.log('Achievement data received:', data);
+            setAchievement(data); // Сохраняем данные достижения
+            setTimeout(() => setAchievement({} as Achievement), 5000);
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Socket disconnected:', socket.id);
+        });
+
+        return () => {
+            socket.off('achievementUnlocked');
+        };
     }, []);
 
 
@@ -168,7 +197,7 @@ const Profile: React.FC = () => {
                                 <input
                                     type="file"
                                     id="avatar-upload"
-                                    style={{ display: "none" }}
+                                    style={{display: "none"}}
                                     onChange={handleAvatarChange} // Обработчик изменения файла
                                     accept="image/*" // Только изображения
                                 />
@@ -257,6 +286,25 @@ const Profile: React.FC = () => {
                         </div>
                     )}
                 </div>
+
+                {achievement.name && (
+                    <>
+                        {/* Затемнённый фон */}
+                        <div className="achievement-overlay" onClick={() => setAchievement({} as Achievement)}></div>
+
+                        {/* Модальное окно с достижением */}
+                        <div className="achievement-notification">
+                            <div className="achievement-content">
+                                <FaCheck className="achievement-icon"/>
+                                <h2>{achievement.name}</h2>
+                                <p>{achievement.description}</p>
+                                <p>Reward: {achievement.reward}</p>
+                                <img src={achievement.icon} alt="Achievement Icon" className="achievement-image"/>
+                            </div>
+                        </div>
+                    </>
+                )}
+
                 <div className="profile__part2">
                     <div className="profile__part2-left">
                         <div className="profile__part2-left-courseText">

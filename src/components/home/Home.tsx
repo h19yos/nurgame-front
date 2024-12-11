@@ -151,8 +151,8 @@ const Home: React.FC = () => {
 
                     // Fetch user data from your API using axiosConfig
                     const userResponse = await axiosConfig.get(`/user/${decodedToken.id}`);
-                    setUserData(userResponse.data.data);
-                    console.log(userResponse.data.data);
+                    setUserData(userResponse.data);
+                    console.log(userResponse.data);
                     // Fetch other necessary data
                     // const coursesResponse = await axiosConfig.get("/courses");
                     // const unfinishedResponse = await axiosConfig.get("/unfinishedCourses");

@@ -25,7 +25,7 @@ interface Achievement {
     icon: string;
 }
 
-const socket = io('http://192.168.0.103:4001');
+const socket = io('https://c273-5-34-4-103.ngrok-free.app');
 
 const Profile: React.FC = () => {
     const [userInfo, setUserInfo] = useState<IUser | null>(null);
@@ -64,7 +64,7 @@ const Profile: React.FC = () => {
 
             axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            const response = await axiosConfig.post('http://localhost:4001/api/auth/change-password/', {
+            const response = await axiosConfig.post('/auth/change-password/', {
                 oldPassword,
                 newPassword,
             });

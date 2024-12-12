@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axiosConfig from "../../../api/axiosConfig.ts";
-import { Answers, Questions, Test } from "../../../models/Models.tsx";
+import axiosConfig from "../../../../api/axiosConfig.ts";
+import { Answers, Questions, Test } from "../../../../models/Models.tsx";
 
 const TestPage = () => {
     const { moduleId } = useParams<{ moduleId: string }>();

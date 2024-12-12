@@ -398,7 +398,7 @@ button {
 .login {
   display: flex;
   min-height: 100vh;
-  background-image: url("src/assets/images/loginBg.svg");
+  background-image: url("src/assets/newImages/loginBg.svg");
   background-size: cover;
   background-position: center;
 
@@ -424,14 +424,14 @@ button {
     &-title {
       font-size: 2rem;
       font-weight: bold;
-      color: #ffb400;
+      color: #548CFF;
     }
 
     h1 {
       font-size: 2.5rem;
       font-weight: 600;
       margin: 1rem 0;
-      color: #FF9500;
+      color: #548CFF;
     }
 
     h2 {
@@ -464,7 +464,6 @@ button {
 
       img {
         max-width: 120px;
-        margin-bottom: 1rem;
       }
 
       h1 {
@@ -501,8 +500,8 @@ button {
         outline: none;
 
         &:focus {
-          border-color: #ffb400;
-          box-shadow: 0 0 4px rgba(255, 180, 0, 0.5);
+          border-color: #548CFF;
+          box-shadow: 0 0 4px rgba(52, 153, 255, 0.5);
         }
       }
     }
@@ -538,7 +537,7 @@ button {
 
       &-forgot {
         font-size: 0.9rem;
-        color: #ffb400;
+        color: #548CFF;
         text-decoration: none;
         cursor: pointer;
 
@@ -554,7 +553,7 @@ button {
       button {
         padding: 0.8rem 7rem;
         border: none;
-        background: #ffb400;
+        background: #548CFF;
         color: #fff;
         font-size: 1rem;
         border-radius: 25px;
@@ -562,7 +561,7 @@ button {
         transition: background 0.3s ease;
 
         &:hover {
-          background: #ff9f00;
+          background: #397aff;
         }
       }
     }
@@ -576,7 +575,7 @@ button {
         color: #666;
 
         .login__form-link-text-nav {
-          color: #ffb400;
+          color: #548CFF;
           font-weight: bold;
           text-decoration: none;
           padding-left: 0.25rem;
@@ -609,7 +608,6 @@ button {
 
       img {
         max-width: 120px;
-        margin-bottom: 1rem;
       }
 
       h1 {
@@ -647,8 +645,8 @@ button {
         outline: none;
 
         &:focus {
-          border-color: #ffb400;
-          box-shadow: 0 0 4px rgba(255, 180, 0, 0.5);
+          border-color: #548CFF;
+          box-shadow: 0 0 4px rgba(41, 113, 255, 0.5);
         }
       }
     }
@@ -684,7 +682,7 @@ button {
 
       &-forgot {
         font-size: 0.9rem;
-        color: #ffb400;
+        color: #548CFF;
         text-decoration: none;
 
         &:hover {
@@ -701,9 +699,9 @@ button {
       &-backbtn {
         width: 12rem;
         padding: 0.8rem 1.75rem;
-        border: 2px solid #ffb400;
+        border: 2px solid #548CFF;
         background: #fff;
-        color: #ffb400;
+        color: #548CFF;
         font-size: 1rem;
         border-radius: 25px;
         cursor: pointer;
@@ -711,7 +709,7 @@ button {
 
         &:hover {
           color: white;
-          background: #ffb400;
+          background: #548CFF;
         }
       }
 
@@ -719,7 +717,7 @@ button {
         width: 12rem;
         padding: 0.8rem 1.75rem;
         border: none;
-        background: #ffb400;
+        background: #548CFF;
         color: #fff;
         font-size: 1rem;
         border-radius: 25px;
@@ -728,8 +726,8 @@ button {
 
         &:hover {
           background: #fff;
-          color: #ffb400;
-          border: 2px solid #ffb400;
+          color: #548CFF;
+          border: 2px solid #548CFF;
         }
       }
     }
@@ -737,7 +735,7 @@ button {
     &-back {
       padding: 0.8rem 1.75rem;
       border: none;
-      background: #ffb400;
+      background: #548CFF;
       color: #fff;
       font-size: 1rem;
       border-radius: 25px;
@@ -745,7 +743,7 @@ button {
       transition: background 0.3s ease;
 
       &:hover {
-        background: #ff9f00;
+        background: #397aff;
       }
     }
 
@@ -758,7 +756,7 @@ button {
         color: #666;
 
         .login__form-link-text-nav {
-          color: #ffb400;
+          color: #548CFF;
           font-weight: bold;
           text-decoration: none;
           padding-left: 0.25rem;
@@ -775,7 +773,7 @@ button {
 .register {
   display: flex;
   min-height: 100vh;
-  background-image: url("src/assets/images/loginBg.svg");
+  background-image: url("src/assets/newImages/loginBg.svg");
   background-size: cover;
   background-position: center;
 
@@ -801,20 +799,19 @@ button {
     &-title {
       font-size: 2rem;
       font-weight: bold;
-      color: #ffb400;
+      color: #548CFF;
     }
 
     h1 {
       font-size: 2.5rem;
       font-weight: 600;
       margin: 1rem 0;
-      color: #FF9500;
+      color: #548CFF;
     }
 
     h2 {
       font-size: 1.8rem;
       font-weight: 600;
-      margin-bottom: 1rem;
     }
 
     p {
@@ -840,7 +837,6 @@ button {
 
       img {
         max-width: 120px;
-        margin-bottom: 1rem;
       }
 
       h1 {
@@ -877,8 +873,8 @@ button {
         outline: none;
 
         &:focus {
-          border-color: #ffb400;
-          box-shadow: 0 0 4px rgba(255, 180, 0, 0.5);
+          border-color: #548CFF;
+          box-shadow: 0 0 4px rgba(63, 95, 255, 0.5);
         }
       }
     }
@@ -914,7 +910,7 @@ button {
 
       &-forgot {
         font-size: 0.9rem;
-        color: #ffb400;
+        color: #548CFF;
         text-decoration: none;
 
         &:hover {
@@ -929,7 +925,7 @@ button {
       button {
         padding: 0.8rem 7rem;
         border: none;
-        background: #ffb400;
+        background: #548CFF;
         color: #fff;
         font-size: 1rem;
         border-radius: 25px;
@@ -937,7 +933,7 @@ button {
         transition: background 0.3s ease;
 
         &:hover {
-          background: #ff9f00;
+          background: #397aff;
         }
       }
     }
@@ -946,11 +942,11 @@ button {
       &-icon {
         cursor: pointer;
         transition: transform 0.2s;
-        stroke: #ffb400;
+        stroke: #548CFF;
 
         &:hover {
           transform: scale(1.1); // Makes the arrow slightly larger on hover
-          stroke: #FF9500; // Optional: Darker hover effect
+          stroke: #397aff; // Optional: Darker hover effect
         }
       }
     }
@@ -961,7 +957,7 @@ button {
       button {
         padding: 0.8rem 7rem;
         border: none;
-        background: #ffb400;
+        background: #548CFF;
         color: #fff;
         font-size: 1rem;
         border-radius: 25px;
@@ -969,7 +965,7 @@ button {
         transition: background 0.3s ease;
 
         &:hover {
-          background: #ff9f00;
+          background: #397aff;
         }
       }
     }
@@ -983,7 +979,7 @@ button {
         color: #666;
 
         &-nav {
-          color: #ffb400;
+          color: #548CFF;
           font-weight: bold;
           text-decoration: none;
           padding-left: 0.25rem;
@@ -1037,7 +1033,6 @@ button {
 
     h2 {
       font-size: 1.5rem;
-      margin-bottom: 0.5rem;
       text-align: center;
       color: #444;
     }
@@ -1113,7 +1108,7 @@ button {
 
 .dashboard {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1177,13 +1172,13 @@ button {
       padding: 0 1.5rem;
 
       p {
-        font-size: 14px;
+        font-size: 1.1rem;
         font-weight: 300;
       }
 
       h1 {
         color: #0B00AE;
-        font-size: 24px;
+        font-size: 2.2rem;
         font-weight: 600;
       }
     }
@@ -1197,7 +1192,7 @@ button {
 
     &-profile {
       img {
-        width: 3rem;
+        width: 4rem;
         border-radius: 50%;
         margin-right: 1rem;
       }
@@ -1251,7 +1246,10 @@ button {
       flex-direction: column;
 
       h3 {
-        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #222222;
+        margin-bottom: 1rem;
       }
     }
 
@@ -1268,7 +1266,7 @@ button {
       padding: 0.5rem;
       border-radius: 0.5rem;
       display: grid;
-      gap: 0.65rem;
+      gap: 2rem;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
       background-color: rgba(230, 230, 230, 0.15);
     }
@@ -1344,7 +1342,10 @@ button {
       flex-direction: column;
 
       h3 {
-        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #222222;
+        margin-bottom: 1rem;
       }
     }
 
@@ -1475,12 +1476,8 @@ button {
 
   &__wrapper {
     border-radius: 1rem;
-    width: 97%;
-    height: 95%;
-    grid-template-columns: 1fr;
-    background-color: #f5f5f5e9;
-    display: grid;
-    grid-template-rows: 1fr 2fr;
+    display: flex;
+    flex-direction: column;
   }
 
   &__part1 {
@@ -1488,6 +1485,7 @@ button {
     border-radius: 20px;
     padding: 25px;
     margin: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 
     &-profileCard {
       display: grid;
@@ -1533,7 +1531,7 @@ button {
             h3 {
               font-weight: 400;
               font-size: 21px;
-              color: #ff9500;
+              color: #397aff;
             }
           }
 
@@ -1561,7 +1559,7 @@ button {
               padding: 1em 2em;
               border: none;
               border-radius: 15px;
-              background-color: #ff9500;
+              background-color: #397aff;
               color: white;
               cursor: pointer;
             }
@@ -1594,15 +1592,14 @@ button {
     border-radius: 20px;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    height: 100%;
-    margin: 0 0 0 25px;
+    box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.2);
+    margin: 0 25px 0 25px;
 
     &-left,
     &-right {
       background-color: #fff;
       height: 78%;
       border-radius: 15px;
-      margin: 0 25px 0 0;
       padding: 25px;
       display: flex;
       flex-direction: column;
@@ -1819,7 +1816,7 @@ button {
         }
 
         button {
-          background-color: #ff9500;
+          background-color: #397aff;
           color: white;
           padding: 10px;
           border: none;
@@ -1848,6 +1845,10 @@ button {
       cursor: pointer;
     }
   }
+}
+
+.profile__avatar12 {
+  width: 4rem;
 }
 
 .modal {
@@ -1880,7 +1881,7 @@ button {
   display: flex;
   border-radius: 1rem;
   flex-direction: column;
-  background: url("src/assets/images/unCourses1.svg") no-repeat center center;
+  background: url("../assets/images/unCourses1.svg") no-repeat center center;
   padding: 1rem;
   width: 87%;
   height: 90%;
@@ -2006,7 +2007,7 @@ button {
   }
 
   &__main {
-    background: url("src/assets/images/testFieldMain.jpg") no-repeat center center;
+    background: url("../assets/images/testFieldMain.jpg") no-repeat center center;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -2065,7 +2066,7 @@ button {
 }
 
 .testLogin {
-  background: url("src/assets/images/testFieldMain.jpg") no-repeat center center;
+  background: url("../assets/images/testFieldMain.jpg") no-repeat center center;
   background-size: cover;
   min-height: 100vh;
   display: flex; /* Flexbox for centering */
@@ -2493,6 +2494,22 @@ button {
   font-size: 2rem;
   color: green;
   margin-bottom: 10px;
+}
+
+.achievement-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  p {
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
 }
 
 /* Изображение достижения */

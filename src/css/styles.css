@@ -311,7 +311,7 @@
 .login {
   display: flex;
   min-height: 100vh;
-  background-image: url("src/assets/images/loginBg.svg");
+  background-image: url("src/assets/newImages/loginBg.svg");
   background-size: cover;
   background-position: center;
 }
@@ -337,13 +337,13 @@
 .login__text-title {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffb400;
+  color: #548CFF;
 }
 .login__text h1 {
   font-size: 2.5rem;
   font-weight: 600;
   margin: 1rem 0;
-  color: #FF9500;
+  color: #548CFF;
 }
 .login__text h2 {
   font-size: 1.8rem;
@@ -371,7 +371,6 @@
 }
 .login__form-title img {
   max-width: 120px;
-  margin-bottom: 1rem;
 }
 .login__form-title h1 {
   font-size: 1.3rem;
@@ -403,8 +402,8 @@
   outline: none;
 }
 .login__form-item input:focus {
-  border-color: #ffb400;
-  box-shadow: 0 0 4px rgba(255, 180, 0, 0.5);
+  border-color: #548CFF;
+  box-shadow: 0 0 4px rgba(52, 153, 255, 0.5);
 }
 .login__form-passwords {
   display: flex;
@@ -433,7 +432,7 @@
 }
 .login__form-passwords-forgot {
   font-size: 0.9rem;
-  color: #ffb400;
+  color: #548CFF;
   text-decoration: none;
   cursor: pointer;
 }
@@ -446,7 +445,7 @@
 .login__form-submit button {
   padding: 0.8rem 7rem;
   border: none;
-  background: #ffb400;
+  background: #548CFF;
   color: #fff;
   font-size: 1rem;
   border-radius: 25px;
@@ -454,7 +453,7 @@
   transition: background 0.3s ease;
 }
 .login__form-submit button:hover {
-  background: #ff9f00;
+  background: #397aff;
 }
 .login__form-link {
   text-align: center;
@@ -465,7 +464,7 @@
   color: #666;
 }
 .login__form-link-text .login__form-link-text-nav {
-  color: #ffb400;
+  color: #548CFF;
   font-weight: bold;
   text-decoration: none;
   padding-left: 0.25rem;
@@ -492,7 +491,6 @@
 }
 .login__forgotForm-title img {
   max-width: 120px;
-  margin-bottom: 1rem;
 }
 .login__forgotForm-title h1 {
   font-size: 1.3rem;
@@ -525,8 +523,8 @@
   outline: none;
 }
 .login__forgotForm-item input:focus {
-  border-color: #ffb400;
-  box-shadow: 0 0 4px rgba(255, 180, 0, 0.5);
+  border-color: #548CFF;
+  box-shadow: 0 0 4px rgba(41, 113, 255, 0.5);
 }
 .login__forgotForm-passwords {
   display: flex;
@@ -555,7 +553,7 @@
 }
 .login__forgotForm-passwords-forgot {
   font-size: 0.9rem;
-  color: #ffb400;
+  color: #548CFF;
   text-decoration: none;
 }
 .login__forgotForm-passwords-forgot:hover {
@@ -569,9 +567,9 @@
 .login__forgotForm-btns-backbtn {
   width: 12rem;
   padding: 0.8rem 1.75rem;
-  border: 2px solid #ffb400;
+  border: 2px solid #548CFF;
   background: #fff;
-  color: #ffb400;
+  color: #548CFF;
   font-size: 1rem;
   border-radius: 25px;
   cursor: pointer;
@@ -579,13 +577,13 @@
 }
 .login__forgotForm-btns-backbtn:hover {
   color: white;
-  background: #ffb400;
+  background: #548CFF;
 }
 .login__forgotForm-btns-submitbtn {
   width: 12rem;
   padding: 0.8rem 1.75rem;
   border: none;
-  background: #ffb400;
+  background: #548CFF;
   color: #fff;
   font-size: 1rem;
   border-radius: 25px;
@@ -594,13 +592,13 @@
 }
 .login__forgotForm-btns-submitbtn:hover {
   background: #fff;
-  color: #ffb400;
-  border: 2px solid #ffb400;
+  color: #548CFF;
+  border: 2px solid #548CFF;
 }
 .login__forgotForm-back {
   padding: 0.8rem 1.75rem;
   border: none;
-  background: #ffb400;
+  background: #548CFF;
   color: #fff;
   font-size: 1rem;
   border-radius: 25px;
@@ -608,7 +606,7 @@
   transition: background 0.3s ease;
 }
 .login__forgotForm-back:hover {
-  background: #ff9f00;
+  background: #397aff;
 }
 .login__forgotForm-link {
   text-align: center;
@@ -619,7 +617,7 @@
   color: #666;
 }
 .login__forgotForm-link-text .login__form-link-text-nav {
-  color: #ffb400;
+  color: #548CFF;
   font-weight: bold;
   text-decoration: none;
   padding-left: 0.25rem;
@@ -631,7 +629,7 @@
 .register {
   display: flex;
   min-height: 100vh;
-  background-image: url("src/assets/images/loginBg.svg");
+  background-image: url("src/assets/newImages/loginBg.svg");
   background-size: cover;
   background-position: center;
 }
@@ -657,18 +655,17 @@
 .register__text-title {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffb400;
+  color: #548CFF;
 }
 .register__text h1 {
   font-size: 2.5rem;
   font-weight: 600;
   margin: 1rem 0;
-  color: #FF9500;
+  color: #548CFF;
 }
 .register__text h2 {
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 1rem;
 }
 .register__text p {
   font-size: 1.2rem;
@@ -690,7 +687,6 @@
 }
 .register__form-title img {
   max-width: 120px;
-  margin-bottom: 1rem;
 }
 .register__form-title h1 {
   font-size: 1.3rem;
@@ -722,8 +718,8 @@
   outline: none;
 }
 .register__form-item input:focus {
-  border-color: #ffb400;
-  box-shadow: 0 0 4px rgba(255, 180, 0, 0.5);
+  border-color: #548CFF;
+  box-shadow: 0 0 4px rgba(63, 95, 255, 0.5);
 }
 .register__form-passwords {
   display: flex;
@@ -752,7 +748,7 @@
 }
 .register__form-passwords-forgot {
   font-size: 0.9rem;
-  color: #ffb400;
+  color: #548CFF;
   text-decoration: none;
 }
 .register__form-passwords-forgot:hover {
@@ -764,7 +760,7 @@
 .register__form-submit button {
   padding: 0.8rem 7rem;
   border: none;
-  background: #ffb400;
+  background: #548CFF;
   color: #fff;
   font-size: 1rem;
   border-radius: 25px;
@@ -772,16 +768,16 @@
   transition: background 0.3s ease;
 }
 .register__form-submit button:hover {
-  background: #ff9f00;
+  background: #397aff;
 }
 .register__form-arrow-icon {
   cursor: pointer;
   transition: transform 0.2s;
-  stroke: #ffb400;
+  stroke: #548CFF;
 }
 .register__form-arrow-icon:hover {
   transform: scale(1.1);
-  stroke: #FF9500;
+  stroke: #397aff;
 }
 .register__form-navigation {
   text-align: center;
@@ -789,7 +785,7 @@
 .register__form-navigation button {
   padding: 0.8rem 7rem;
   border: none;
-  background: #ffb400;
+  background: #548CFF;
   color: #fff;
   font-size: 1rem;
   border-radius: 25px;
@@ -797,7 +793,7 @@
   transition: background 0.3s ease;
 }
 .register__form-navigation button:hover {
-  background: #ff9f00;
+  background: #397aff;
 }
 .register__form-link {
   text-align: center;
@@ -808,7 +804,7 @@
   color: #666;
 }
 .register__form-link-text-nav {
-  color: #ffb400;
+  color: #548CFF;
   font-weight: bold;
   text-decoration: none;
   padding-left: 0.25rem;
@@ -854,7 +850,6 @@
 }
 .forgot-password form h2 {
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
   text-align: center;
   color: #444;
 }
@@ -917,7 +912,7 @@
 
 .dashboard {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -971,12 +966,12 @@
   padding: 0 1.5rem;
 }
 .dashboard__part1-header p {
-  font-size: 14px;
+  font-size: 1.1rem;
   font-weight: 300;
 }
 .dashboard__part1-header h1 {
   color: #0B00AE;
-  font-size: 24px;
+  font-size: 2.2rem;
   font-weight: 600;
 }
 .dashboard__part1-stats {
@@ -986,7 +981,7 @@
   border-radius: 1rem;
 }
 .dashboard__part1-profile img {
-  width: 3rem;
+  width: 4rem;
   border-radius: 50%;
   margin-right: 1rem;
 }
@@ -1031,7 +1026,10 @@
   flex-direction: column;
 }
 .dashboard__part2-right h3 {
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222222;
+  margin-bottom: 1rem;
 }
 .dashboard__part2-course-list {
   border-radius: 1rem;
@@ -1045,7 +1043,7 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
   display: grid;
-  gap: 0.65rem;
+  gap: 2rem;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   background-color: rgba(230, 230, 230, 0.15);
 }
@@ -1109,7 +1107,10 @@
   flex-direction: column;
 }
 .dashboard__part3-right h3 {
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222222;
+  margin-bottom: 1rem;
 }
 .dashboard__part3-activity-list {
   margin-right: 1.5rem;
@@ -1219,18 +1220,15 @@
 }
 .profile__wrapper {
   border-radius: 1rem;
-  width: 97%;
-  height: 95%;
-  grid-template-columns: 1fr;
-  background-color: rgba(245, 245, 245, 0.9137254902);
-  display: grid;
-  grid-template-rows: 1fr 2fr;
+  display: flex;
+  flex-direction: column;
 }
 .profile__part1 {
   background-color: #fff;
   border-radius: 20px;
   padding: 25px;
   margin: 25px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 .profile__part1-profileCard {
   display: grid;
@@ -1269,7 +1267,7 @@
 .profile__part1-profileCard-cardInfo-infoText h3 {
   font-weight: 400;
   font-size: 21px;
-  color: #ff9500;
+  color: #397aff;
 }
 .profile__part1-profileCard-cardInfo-infoButtons button {
   width: 50px;
@@ -1290,7 +1288,7 @@
   padding: 1em 2em;
   border: none;
   border-radius: 15px;
-  background-color: #ff9500;
+  background-color: #397aff;
   color: white;
   cursor: pointer;
 }
@@ -1313,14 +1311,13 @@
   border-radius: 20px;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  height: 100%;
-  margin: 0 0 0 25px;
+  box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.2);
+  margin: 0 25px 0 25px;
 }
 .profile__part2-left, .profile__part2-right {
   background-color: #fff;
   height: 78%;
   border-radius: 15px;
-  margin: 0 25px 0 0;
   padding: 25px;
   display: flex;
   flex-direction: column;
@@ -1490,7 +1487,7 @@
   border-radius: 5px;
 }
 .profile__modal__content form button {
-  background-color: #ff9500;
+  background-color: #397aff;
   color: white;
   padding: 10px;
   border: none;
@@ -1515,6 +1512,10 @@
   cursor: pointer;
 }
 
+.profile__avatar12 {
+  width: 4rem;
+}
+
 .modal__content input {
   padding: 5px;
 }
@@ -1529,7 +1530,7 @@
   display: flex;
   border-radius: 1rem;
   flex-direction: column;
-  background: url("src/assets/images/unCourses1.svg") no-repeat center center;
+  background: url("../assets/images/unCourses1.svg") no-repeat center center;
   padding: 1rem;
   width: 87%;
   height: 90%;
@@ -1627,7 +1628,7 @@
   background-color: #fff;
 }
 .testField__main {
-  background: url("src/assets/images/testFieldMain.jpg") no-repeat center center;
+  background: url("../assets/images/testFieldMain.jpg") no-repeat center center;
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -1679,7 +1680,7 @@
 }
 
 .testLogin {
-  background: url("src/assets/images/testFieldMain.jpg") no-repeat center center;
+  background: url("../assets/images/testFieldMain.jpg") no-repeat center center;
   background-size: cover;
   min-height: 100vh;
   display: flex; /* Flexbox for centering */
@@ -2054,6 +2055,21 @@
   font-size: 2rem;
   color: green;
   margin-bottom: 10px;
+}
+
+.achievement-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.achievement-content h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.achievement-content p {
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 
 /* Изображение достижения */

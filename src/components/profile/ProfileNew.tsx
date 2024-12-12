@@ -25,7 +25,14 @@ interface Achievement {
     icon: string;
 }
 
-const socket = io('http://192.168.0.107:4001');
+interface Achievements {
+    id: number;
+    name: string;
+    description: string;
+    obtainedAt: string;
+}
+
+const socket = io('http://localhost:4001');
 
 const Profile: React.FC = () => {
     const [userInfo, setUserInfo] = useState<IUser | null>(null);
@@ -34,20 +41,32 @@ const Profile: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [achievement, setAchievement] = useState<Achievement>({} as Achievement);
+    const [achievements, setAchievements] = useState<Achievements>([]);
 
     const courses: Course[] = [
-        {title: 'E-commerce Excellence: Selling Smarter Online', instructor: 'Andy Stevanus'},
-        {title: 'Influencer Marketing Insider', instructor: 'Brian Braun'},
-        {title: 'Digital Dynamo: Unleash Your Online Potential', instructor: 'Chyntia Laura'},
-        {title: 'SEO Wizardry: Ranking High in the Digital World', instructor: 'Dennise Khan'},
+        {
+            title: 'Антикоррупционные реформы',
+            instructor: 'Новые законы усиливают ответственность за взяточничество.',
+            icon: 'https://img.icons8.com/?size=100&id=yaGmG5J3JLAv&format=png&color=000000'
+        },
+        {
+            title: 'Технологии против коррупции',
+            instructor: 'Внедрение блокчейна для прозрачности госзакупок.',
+            icon: 'https://img.icons8.com/?size=100&id=90BayNWpisou&format=png&color=000000'
+        },
+        {
+            title: 'Программа защиты информаторов',
+            instructor: 'Гарантии анонимности для сообщивших о коррупции.',
+            icon: 'https://img.icons8.com/?size=100&id=n3MVZpvcwYyU&format=png&color=000000'
+        },
+        {
+            title: 'Международное сотрудничество',
+            instructor: 'Страны объединяются для обмена данными о коррупционерах.',
+            icon: 'https://img.icons8.com/?size=100&id=mVmQhKb55ZhL&format=png&color=000000'
+        },
     ];
 
-    const messages: Message[] = [
-        {sender: 'Chloe Jess', text: 'I have done my task last week..', time: '15min ago', read: true},
-        {sender: 'Geex UI Design Team', text: 'Don’t forget our daily report gu...', time: '2h ago', read: false},
-        {sender: 'Roberto', text: 'Last week, do you remember?', time: '02:45 AM', read: true},
-        {sender: 'Lisa Blekcurrent', text: 'My boss give me that task last..', time: '2 min ago', read: false},
-    ];
+
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -67,6 +86,7 @@ const Profile: React.FC = () => {
             const response = await axiosConfig.post('/auth/change-password/', {
                 oldPassword,
                 newPassword,
+                confirmPassword
             });
 
             setMessage(response.data.message);
@@ -136,11 +156,13 @@ const Profile: React.FC = () => {
 
                 // Fetch additional profile info if needed
                 const response = await axiosConfig.get(`/user/${decodedToken.id}`);
+                const response2 = await axiosConfig.get(`/user/${decodedToken.id}/achievements`);
                 setUserInfo((prevUserInfo) => ({
                     ...prevUserInfo,
                     ...response.data.data, // Merge data from API
                 }));
-
+                setAchievements(response2.data.data)
+                console.log(response2.data.data)
             } catch (err) {
                 console.error('Error fetching user profile:', err);
                 setError('Failed to fetch user profile.');
@@ -149,23 +171,23 @@ const Profile: React.FC = () => {
 
         fetchUserProfile();
 
-        // socket.on('connect', () => {
-        //     console.log('Socket connected:', socket.id);
-        // });
-        //
-        // socket.on('achievementUnlocked', (data) => {
-        //     console.log('Achievement data received:', data);
-        //     setAchievement(data); // Сохраняем данные достижения
-        //     setTimeout(() => setAchievement({} as Achievement), 5000);
-        // });
-        //
-        // socket.on('disconnect', () => {
-        //     console.log('Socket disconnected:', socket.id);
-        // });
-        //
-        // return () => {
-        //     socket.off('achievementUnlocked');
-        // };
+        socket.on('connect', () => {
+            console.log('Socket connected:', socket.id);
+        });
+
+        socket.on('achievementUnlocked', (data) => {
+            console.log('Achievement data received:', data);
+            setAchievement(data); // Сохраняем данные достижения
+            setTimeout(() => setAchievement({} as Achievement), 5000);
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Socket disconnected:', socket.id);
+        });
+
+        return () => {
+            socket.off('achievementUnlocked');
+        };
     }, []);
 
 
@@ -205,9 +227,13 @@ const Profile: React.FC = () => {
                             <div className="profile__part1-profileCard-cardInfo">
                                 <div className="profile__part1-profileCard-cardInfo-info">
                                     <div className="profile__part1-profileCard-cardInfo-infoText">
-                                        <div>
-                                            <h1>{userInfo.lastName} {userInfo.username}</h1>
-                                            <h3>{userInfo.username}</h3>
+                                        <div className={"opopop"}>
+                                            <div>
+                                                <h4>ФИО: </h4><h1>{userInfo.lastName} {userInfo.username}</h1>
+                                            </div>
+                                            <div>
+                                                <h4>Логин: </h4><h3>{userInfo.username}</h3>
+                                            </div>
                                         </div>
                                         <div className="profile__part1-profileCard-cardInfo-changePasswordButton">
                                             {isModalOpen && (
@@ -295,10 +321,9 @@ const Profile: React.FC = () => {
                         {/* Модальное окно с достижением */}
                         <div className="achievement-notification">
                             <div className="achievement-content">
-                                <FaCheck className="achievement-icon"/>
                                 <h2>{achievement.name}</h2>
                                 <p>{achievement.description}</p>
-                                <p>Reward: {achievement.reward}</p>
+                                <p>Награда: {achievement.reward}</p>
                                 <img src={achievement.icon} alt="Achievement Icon" className="achievement-image"/>
                             </div>
                         </div>
@@ -309,8 +334,8 @@ const Profile: React.FC = () => {
                     <div className="profile__part2-left">
                         <div className="profile__part2-left-courseText">
                             <div className="profile__part2-left-titles">
-                                <h1>Subscribed Courses</h1>
-                                <p>Maiores dicta atque dolorem temporibus</p>
+                                <h1>Новости</h1>
+                                <p>Главные новости в мире</p>
                             </div>
                             <button><img src='src/assets/images/addIcon.svg' alt="Add"/></button>
                         </div>
@@ -319,8 +344,8 @@ const Profile: React.FC = () => {
                                 {courses.map((course, index) => (
                                     <li key={index} className="profile__part2-left-listItem">
                                         <div className="profile__listItemLeft">
-                                            <img src={`https://via.placeholder.com/50`} alt="Course"
-                                                 className="profile__avatar"/>
+                                            <img src={course.icon} alt={course.title}
+                                                 style={{width: '4rem', marginRight: '1rem'}}/>
                                             <div className="profile__part2-left-listItem-opop">
                                                 <h3 className="profile__courseTitle">{course.title}</h3>
                                                 <p className="profile__instructor">{course.instructor}</p>
@@ -335,31 +360,34 @@ const Profile: React.FC = () => {
                     <div className="profile__part2-right">
                         <div className="profile__part2-right-courseText">
                             <div>
-                                <h1>Latest Message</h1>
-                                <p>Maiores dicta atque dolorem temporibus</p>
+                                <h1>Достижения</h1>
+                                <p>Посмотри какие достижения ты получил</p>
                             </div>
                             <button><img src='src/assets/images/addIcon.svg' alt="Add"/></button>
                         </div>
                         <div className="profile__part2-right-section">
                             <ul className="profile__part2-right-list">
-                                {messages.map((message, index) => (
+                                {achievements.map((achievement, index) => (
                                     <li key={index} className="profile__part2-right-listItem">
                                         <div className="profile__part2-right-messageInfo">
-                                            <img src={`https://via.placeholder.com/50`} alt="Sender"
-                                                 className="profile__avatar"/>
+                                            <img
+                                                src={achievement.icon || "https://via.placeholder.com/50"}
+                                                alt={achievement.name}
+                                                className="profile__avatar12"
+                                            />
                                             <div>
-                                                <h3 className="profile__part2-right-sender">{message.sender}</h3>
-                                                <p className="profile__part2-right-messageText">{message.text}</p>
+                                                <h3 className="profile__part2-right-sender">{achievement.name}</h3>
+                                                <p className="profile__part2-right-messageText">{achievement.description}</p>
                                             </div>
                                         </div>
                                         <div className="profile__part2-right-messageMeta">
-                                            <span className="profile__part2-right-time">{message.time}</span>
-                                            {message.read ? (
-                                                <FaCheck className="profile__part2-right-icon"/>
-                                            ) : message.unreadCount && (
-                                                <span
-                                                    className="profile__part2-right-unreadCount">{message.unreadCount}</span>
-                                            )}
+                    <span className="profile__part2-right-time">
+                        {new Date(achievement.obtainedAt).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                        })}
+                    </span>
                                         </div>
                                     </li>
                                 ))}

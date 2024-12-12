@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Course } from "../../models/Models.tsx";
-import Graph from "./Graph.tsx";
+import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Course} from "../../models/Models.tsx";
 import axiosConfig from "../../api/axiosConfig.ts";
 
 const Courses = () => {
@@ -16,7 +15,6 @@ const Courses = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                axiosConfig.defaults.headers.common["ngrok-skip-browser-warning"] = "true";
                 const response = await axiosConfig.get("/course/3/");
                 const data = response.data;
 
@@ -35,8 +33,6 @@ const Courses = () => {
         try {
             const token = localStorage.getItem('authToken');
             if (!token) throw new Error('No authentication token found');
-
-            axiosConfig.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
             // Send GET request to complete the course
             const response = await axiosConfig.get(
@@ -126,7 +122,7 @@ const Courses = () => {
                                 <a>EDIT GOAL</a>
                             </div>
                             <div className="courses__wrapper-information-xp-progressBar-bar">
-                                <img src="src/assets/images/xpChest.svg" alt="" />
+                                <img src="src/assets/images/xpChest.svg" alt=""/>
                                 <div className="courses__wrapper-information-xp-progressBar-bar-progress">
                                     <p>Daily Goal</p>
                                     <div className="courses__wrapper-information-xp-progressBar-bar-progress-t">
@@ -142,7 +138,6 @@ const Courses = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Graph />
                         </div>
                     </div>
                 </div>

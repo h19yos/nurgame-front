@@ -1,9 +1,9 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Lessons} from "../../../models/Models.tsx";
-import axiosConfig from "../../../api/axiosConfig.ts";
+import {Lessons} from "../../../../models/Models.tsx";
+import axiosConfig from "../../../../api/axiosConfig.ts";
 
-const LessonPage = () => {
+const LessonNew = () => {
     const {moduleId, lessonId} = useParams<{ moduleId: string; lessonId: string }>();
     const [lesson, setLesson] = useState<Lessons | null>(null);
     const [error, setError] = useState<string>("");
@@ -54,28 +54,48 @@ const LessonPage = () => {
     if (!lesson) return <p>Урок не найден</p>;
 
     return (
-        <div className="lesson-page">
-            <h1 className="lesson__title">{lesson.title}</h1>
+        <div className="lessonNew-page">
+            <h1 className="lessonNew__title">{lesson.title}</h1>
 
-            <div className="lessonLeft">
-                {/* Video Section */}
-                <div className="lesson__video-section">
-                    {lesson.type === "video" && (
-                        <iframe
-                            src={lesson.videoUrl}
-                            title={lesson.title}
-                            className="lesson__video"
-                            allowFullScreen
-                        ></iframe>
-                    )}
+            <div className="lessonNew__fullContent">
+                <div className="lessonNewLeft">
+                    {/* Video Section */}
+                    <div className="lessonNew__video-section">
+                        {lesson.type === "video" && (
+                            <iframe
+                                src={lesson.videoUrl}
+                                title={lesson.title}
+                                className="lessonNew__video"
+                                allowFullScreen
+                            ></iframe>
+                        )}
+                        {lesson.type === "interactive" && (
+                            // If the game is local, use a <Link> to navigate to the game page
+                            <Link to={lesson.videoUrl} className="game-button">
+                                Go to Game
+                            </Link>
+                        )}
+
+                    </div>
                 </div>
+
+                {/* Lesson Details */}
+                <div className="lessonNew__details">
+                    <h2>Подробности урока</h2>
+                    {/* Render Content */}
+                    <div
+                        className="lessonNew__content"
+                        dangerouslySetInnerHTML={{__html: lesson.content}}
+                    ></div>
+                </div>
+
                 {/* Comment Section */}
-                <div className="lesson__comments-section">
+                <div className="lessonNew__comments-section">
                     <h2>Комментарии</h2>
-                    <div className="lesson__comments">
+                    <div className="lessonNew__comments">
                         {comments.length > 0 ? (
                             comments.map((comment, index) => (
-                                <div key={index} className="lesson__comment">
+                                <div key={index} className="lessonNew__comment">
                                     {comment}
                                 </div>
                             ))
@@ -83,31 +103,21 @@ const LessonPage = () => {
                             <p>Комментариев пока нет. Оставляйте комментарии первыми!</p>
                         )}
                     </div>
-                    <div className="lesson__add-comment">
+                    <div className="lessonNew__add-comment">
                     <textarea
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Напишите комментарий..."
-                        className="lesson__comment-input"
+                        className="lessonNew__comment-input"
                     ></textarea>
-                        <button onClick={handleAddComment} className="lesson__comment-button">
+                        <button onClick={handleAddComment} className="lessonNew__comment-button">
                             Добавить комментарий
                         </button>
                     </div>
                 </div>
             </div>
-
-            {/* Lesson Details */}
-            <div className="lesson__details">
-                <h2>Подробности урока</h2>
-                {/* Render Content */}
-                <div
-                    className="lesson__content"
-                    dangerouslySetInnerHTML={{__html: lesson.content}}
-                ></div>
-            </div>
         </div>
     );
 };
 
-export default LessonPage;
+export default LessonNew;
